@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@theme {
+  /* Surfaces — matched to the Gen-Z Technologies logo palette */
+  --color-background: #F5F3EF;
+  --color-surface: #FFFFFF;
+  --color-surface-dark: #000833;
+  --color-border: #D8D4CC;
+
+  /* Text */
+  --color-foreground: #000080;
+  --color-muted: #6B6B6B;
+  --color-muted-foreground: #6B6B6B;
+  --color-input: #D8D4CC;
+
+  /* Brand */
+  --color-primary: #FF4D01;
+  /* Deeper shade of the logo orange for text and solid buttons: meets WCAG AA (4.5:1) on cream and with white text. */
+  --color-primary-strong: #C43C00;
+  --color-primary-hover: #A83300;
+  --color-primary-foreground: #FFFFFF;
+  --color-accent: #02683F;
+  --color-accent-hover: #024D2E;
+  --color-accent-foreground: #FFFFFF;
+
+  /* Status */
+  --color-success: #02683F;
+  --color-warning: #D97706;
+  --color-destructive: #DC2626;
+  --color-destructive-foreground: #FFFFFF;
+  --color-ring: #FF4D01;
+
+  /* Type */
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: var(--font-outfit), var(--font-inter), -apple-system, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Halftone Dot Pattern Overlay */
+.halftone-overlay {
+  background-image: radial-gradient(circle, rgba(18, 19, 26, 0.2) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-hover);
+}
+
+/* Horizontal scrollers without a visible scrollbar */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Page background: slow drifting brand-color light */
+@keyframes aurora-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(6vw, 4vh, 0) scale(1.08); }
+  66% { transform: translate3d(-4vw, 6vh, 0) scale(0.95); }
+}
+
+.bg-aurora {
+  will-change: transform;
+  animation: aurora-drift 26s ease-in-out infinite;
+}
+
+.bg-aurora--slow {
+  animation-duration: 34s;
+}
+
+.bg-aurora--reverse {
+  animation-duration: 30s;
+  animation-direction: reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-aurora { animation: none; }
+}
+
+/* Infinite Marquee Keyframe */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-fast {
+  display: flex;
+  width: max-content;
+  animation: marquee 15s linear infinite;
+}
+
+/* Blinking Cursor for Typewriter */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-cursor-blink {
+  animation: blink 0.9s infinite;
+}
+
+/* 21st.dev Star Button Animation Keyframe */
+@keyframes star-btn {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+.animate-star-btn {
+  animation: star-btn calc(var(--duration, 3) * 1s) linear infinite;
+}
