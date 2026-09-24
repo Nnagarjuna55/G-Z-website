@@ -48,7 +48,7 @@ function hasWebGL() {
   }
 }
 
-export default function SuiteOrbit() {
+export default function SuiteOrbit({ scrollT = 0 }: { scrollT?: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion() ?? false;
   const [webgl, setWebgl] = useState<boolean | null>(null);
@@ -70,7 +70,7 @@ export default function SuiteOrbit() {
 
   return (
     <div ref={containerRef} className="relative w-full h-full">
-      {webgl ? <SuiteOrbitScene active={inView} reduced={reduced} /> : <StaticOrb />}
+      {webgl ? <SuiteOrbitScene active={inView} reduced={reduced} scrollT={scrollT} /> : <StaticOrb />}
     </div>
   );
 }

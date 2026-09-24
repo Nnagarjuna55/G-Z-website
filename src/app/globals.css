@@ -106,6 +106,68 @@
   .bg-aurora { animation: none; }
 }
 
+/* Kinetic-type reveal (RevealText). Lines start below their mask and rise in. */
+@keyframes reveal-up {
+  from { transform: translateY(110%); }
+  to { transform: translateY(0); }
+}
+
+.reveal-line {
+  transform: translateY(110%);
+  will-change: transform;
+}
+
+.reveal-load .reveal-line {
+  animation: reveal-up 0.95s var(--reveal-delay, 0s) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-scroll .reveal-line {
+  transition: transform 0.95s var(--reveal-delay, 0s) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scroll.is-revealed .reveal-line {
+  transform: translateY(0);
+}
+
+/* Never leave text hidden if motion is off or scripting is unavailable. */
+@media (prefers-reduced-motion: reduce), (scripting: none) {
+  .reveal-line { transform: none !important; animation: none !important; transition: none !important; }
+}
+
+/* Hero curtain open — pure CSS, not GSAP: it must start the instant the browser
+   paints the SSR'd HTML, not wait for JS to hydrate and an effect to fire. A
+   JS-triggered version stays opaque for however long hydration takes (slow on a dev
+   build loading three.js/gsap), which can read as a stuck screen. */
+@keyframes hero-curtain-wipe {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(0); }
+}
+
+.hero-curtain {
+  transform-origin: top;
+  animation: hero-curtain-wipe 0.9s 0.1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-curtain { display: none; }
+}
+
+/* Scroll-velocity "whip" blur — SmoothScrollProvider writes --scroll-blur on fast
+   flicks and decays it back to 0. Applied only to the fixed ambient background/grain
+   layers (.scroll-blur-layer), never to text/images/the 3D canvas. */
+:root {
+  --scroll-blur: 0px;
+}
+
+.scroll-blur-layer {
+  filter: blur(var(--scroll-blur));
+  will-change: filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-blur-layer { filter: none !important; }
+}
+
 /* Infinite Marquee Keyframe */
 @keyframes marquee {
   0% {

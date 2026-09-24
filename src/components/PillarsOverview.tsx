@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight, BookOpen, MessageSquareText, FileText, Users } from "lucide-react";
 import { PILLARS } from "@/data/pillars";
 import TiltCard from "@/components/ui/TiltCard";
+import RevealText from "@/components/ui/RevealText";
 
 const ICONS = {
   BookOpen,
@@ -20,7 +21,7 @@ export default function PillarsOverview() {
           <div>
             <span className="text-xs font-mono font-bold text-accent uppercase tracking-wider">Our Products</span>
             <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-foreground mt-2">
-              Four AI Products, <br className="hidden sm:block" /> One Connected Suite
+              <RevealText trigger="scroll" lines={["Four AI Products,", "One Connected Suite"]} />
             </h2>
           </div>
           <p className="text-sm md:text-base text-muted font-medium max-w-sm">

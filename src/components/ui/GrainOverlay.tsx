@@ -7,7 +7,7 @@ export default function GrainOverlay() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[9999] opacity-[0.035]"
+      className="scroll-blur-layer pointer-events-none fixed inset-0 z-[9999] opacity-[0.035]"
       style={{ backgroundImage: NOISE, backgroundSize: "160px 160px" }}
     />
   );

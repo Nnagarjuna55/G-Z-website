@@ -1,6 +1,6 @@
 export default function PageBackground() {
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background">
+    <div aria-hidden className="scroll-blur-layer pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background">
       {/* Drifting brand-color light (radial gradients, no CSS blur filter — cheap to animate) */}
       <div className="bg-aurora absolute -top-[20%] -left-[10%] h-[70vh] w-[70vh] rounded-full bg-[radial-gradient(circle,rgba(255,77,1,0.16)_0%,transparent_65%)]" />
       <div className="bg-aurora bg-aurora--slow absolute top-[30%] -right-[15%] h-[80vh] w-[80vh] rounded-full bg-[radial-gradient(circle,rgba(2,104,63,0.13)_0%,transparent_65%)]" />

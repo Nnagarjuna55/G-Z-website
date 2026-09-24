@@ -12,16 +12,16 @@ export interface PillarItem {
 
 export const PILLARS: PillarItem[] = [
   {
-    id: "ai-lms",
+    id: "ai-job-portal",
     number: "01",
-    title: "AI LMS",
-    tagline: "For Institutions",
+    title: "AI Job Portal",
+    tagline: "For Companies",
     description:
-      "A complete, white-labeled learning management system — course authoring, learner management, analytics, and certification, deployable under your institution's own brand.",
-    href: "/ai-lms",
-    stat: { value: "White-label", label: "under your brand" },
-    iconName: "BookOpen",
-    color: "primary",
+      "Companies post roles once and let AI screen, score, and shortlist candidates instantly — matching verified skills and signal, not just keywords.",
+    href: "/job-portal",
+    stat: { value: "Verified", label: "skill signals" },
+    iconName: "Users",
+    color: "accent",
   },
   {
     id: "ai-interviewer",
@@ -48,15 +48,15 @@ export const PILLARS: PillarItem[] = [
     color: "primary",
   },
   {
-    id: "ai-job-portal",
+    id: "ai-lms",
     number: "04",
-    title: "AI Job Portal",
-    tagline: "For Companies",
+    title: "AI LMS",
+    tagline: "For Institutions",
     description:
-      "Companies post roles once and let AI screen, score, and shortlist candidates instantly — matching verified skills and signal, not just keywords.",
-    href: "/job-portal",
-    stat: { value: "Verified", label: "skill signals" },
-    iconName: "Users",
-    color: "accent",
+      "A complete, white-labeled learning management system — course authoring, learner management, analytics, and certification, deployable under your institution's own brand.",
+    href: "/ai-lms",
+    stat: { value: "White-label", label: "under your brand" },
+    iconName: "BookOpen",
+    color: "primary",
   },
 ];

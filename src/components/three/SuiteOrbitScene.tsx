@@ -31,7 +31,7 @@ interface RingSpec {
 
 const RINGS: RingSpec[] = [
   {
-    radius: 1.95,
+    radius: 1.7,
     rotation: [1.15, 0, 0.35],
     speed: 0.22,
     nodes: [
@@ -40,7 +40,7 @@ const RINGS: RingSpec[] = [
     ],
   },
   {
-    radius: 2.45,
+    radius: 2.1,
     rotation: [1.4, 0, -0.55],
     speed: -0.16,
     nodes: [
@@ -102,18 +102,26 @@ function Ring({ spec, reduced }: { spec: RingSpec; reduced: boolean }) {
   );
 }
 
-function Suite({ reduced }: { reduced: boolean }) {
+function Suite({ reduced, scrollT }: { reduced: boolean; scrollT: number }) {
   const groupRef = useRef<THREE.Group>(null);
   const shellRef = useRef<THREE.Mesh>(null);
 
   useFrame((state, delta) => {
     const group = groupRef.current;
     if (group && !reduced) {
-      group.rotation.y = THREE.MathUtils.damp(group.rotation.y, state.pointer.x * 0.35, 2.5, delta);
-      group.rotation.x = THREE.MathUtils.damp(group.rotation.x, -state.pointer.y * 0.22, 2.5, delta);
+      // Scroll adds a slow extra spin and a gentle "camera push" scale on top of the
+      // existing pointer-driven tilt — the orb reacts to scroll, not just the cursor.
+      const targetY = state.pointer.x * 0.35 + scrollT * 0.6;
+      const targetX = -state.pointer.y * 0.22;
+      group.rotation.y = THREE.MathUtils.damp(group.rotation.y, targetY, 2.5, delta);
+      group.rotation.x = THREE.MathUtils.damp(group.rotation.x, targetX, 2.5, delta);
+
+      const targetScale = 1 + scrollT * 0.12;
+      const nextScale = THREE.MathUtils.damp(group.scale.x, targetScale, 2.5, delta);
+      group.scale.setScalar(nextScale);
     }
     if (shellRef.current && !reduced) {
-      shellRef.current.rotation.y += delta * 0.08;
+      shellRef.current.rotation.y += delta * (0.08 + scrollT * 0.25);
       shellRef.current.rotation.x += delta * 0.03;
     }
   });
@@ -148,12 +156,20 @@ function Suite({ reduced }: { reduced: boolean }) {
   );
 }
 
-export default function SuiteOrbitScene({ active, reduced }: { active: boolean; reduced: boolean }) {
+export default function SuiteOrbitScene({
+  active,
+  reduced,
+  scrollT = 0,
+}: {
+  active: boolean;
+  reduced: boolean;
+  scrollT?: number;
+}) {
   return (
     <Canvas
       frameloop={active ? "always" : "never"}
       dpr={[1, 1.75]}
-      camera={{ position: [0, 0, 7.6], fov: 42 }}
+      camera={{ position: [0, 0, 9.4], fov: 42 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}
     >
@@ -169,7 +185,7 @@ export default function SuiteOrbitScene({ active, reduced }: { active: boolean; 
         <Lightformer intensity={1.6} color={GREEN} position={[6, -1, 0]} rotation-y={-Math.PI / 2} scale={[6, 6, 1]} />
       </Environment>
 
-      <Suite reduced={reduced} />
+      <Suite reduced={reduced} scrollT={scrollT} />
     </Canvas>
   );
 }
