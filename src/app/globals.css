@@ -106,6 +106,45 @@
   .bg-aurora { animation: none; }
 }
 
+/* Dark cinematic zone. Tailwind v4 utilities resolve --color-* at use time, so
+   redefining the tokens here flips every descendant that uses them (bg-background,
+   text-foreground, border-border, text-muted…) without touching each component.
+   The handful of literal colors (bg-white cards, shadows) are remapped below. */
+.dark-zone {
+  --color-background: #000419;
+  --color-surface: #070d2a;
+  --color-foreground: #ffffff;
+  --color-border: rgba(255, 255, 255, 0.14);
+  --color-muted: rgba(255, 255, 255, 0.62);
+  --color-muted-foreground: rgba(255, 255, 255, 0.62);
+  --color-input: rgba(255, 255, 255, 0.14);
+  /* The brand orange darkens for contrast on cream; on navy it must lighten. */
+  --color-primary-strong: #ff7a3d;
+  --color-primary-hover: #ff9463;
+  background-color: #000419;
+  color: #fff;
+}
+
+.dark-zone .bg-white,
+.dark-zone .bg-white\/60,
+.dark-zone .bg-white\/80,
+.dark-zone .bg-white\/90 {
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+}
+
+.dark-zone .border-white {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.dark-zone .shadow-sm,
+.dark-zone .shadow-xs,
+.dark-zone .shadow-lg,
+.dark-zone .shadow-xl,
+.dark-zone .shadow-2xl {
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.85);
+}
+
 /* Kinetic-type reveal (RevealText). Lines start below their mask and rise in. */
 @keyframes reveal-up {
   from { transform: translateY(110%); }

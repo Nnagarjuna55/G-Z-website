@@ -15,8 +15,8 @@ function StaticOrb() {
   return (
     <div className="absolute inset-0 flex items-center justify-center">
       <div className="relative w-[58%] aspect-square">
-        <div className="absolute inset-[-12%] rounded-full border border-foreground/10" />
-        <div className="absolute inset-[-28%] rounded-full border border-foreground/5" />
+        <div className="absolute inset-[-12%] rounded-full border border-white/10" />
+        <div className="absolute inset-[-28%] rounded-full border border-white/5" />
         <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_32%_28%,#3b3bd6_0%,#000080_55%,#000033_100%)] shadow-[0_40px_80px_-20px_rgba(0,0,128,0.5)]" />
         <div className="absolute -left-6 top-1/3 w-1/2 h-1/2 rounded-full bg-primary/40 blur-3xl" />
         <div className="absolute -right-6 bottom-1/4 w-1/2 h-1/2 rounded-full bg-accent/40 blur-3xl" />
@@ -24,7 +24,7 @@ function StaticOrb() {
       {PRODUCTS.map((p) => (
         <div
           key={p.label}
-          className={`absolute ${p.className} flex items-center gap-1.5 whitespace-nowrap rounded-full border border-border bg-white/95 px-3 py-1.5 text-xs font-bold text-foreground shadow-lg`}
+          className={`absolute ${p.className} flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-3 py-1.5 text-xs font-bold text-white shadow-lg`}
         >
           <span className="h-2 w-2 rounded-full" style={{ backgroundColor: p.color }} />
           {p.label}

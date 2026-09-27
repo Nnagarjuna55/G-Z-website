@@ -14,8 +14,8 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full">
-      <Navbar />
+    <main className="dark-zone relative min-h-screen w-full">
+      <Navbar overDark />
       <Hero />
       <TrustedBrands />
       <PillarsOverview />

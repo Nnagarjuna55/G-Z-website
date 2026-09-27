@@ -22,7 +22,7 @@ const COMPANY_LINKS = [
 	{ label: 'Contact', href: '/contact', icon: Mail, description: 'Request a demo or talk to us' },
 ];
 
-export function Header() {
+export function Header({ overDark = false }: { overDark?: boolean }) {
 	const [open, setOpen] = React.useState(false);
 	const [activeMenu, setActiveMenu] = React.useState<string | null>(null);
 	const [openMobileId, setOpenMobileId] = React.useState<string | null>(null);
@@ -51,9 +51,16 @@ export function Header() {
 		};
 	}, [open]);
 
+	// Over the dark hero stage the bar is transparent, so its links must invert
+	// until the page scrolls and the solid background takes over.
+	const onDark = overDark && !scrolled && !open;
+
 	const triggerClass = buttonVariants({
 		variant: 'ghost',
-		className: 'text-xs font-bold tracking-wide text-foreground hover:text-primary-strong hover:bg-transparent normal-case gap-1',
+		className: cn(
+			'text-xs font-bold tracking-wide hover:bg-transparent normal-case gap-1',
+			onDark ? 'text-white/85 hover:text-white' : 'text-foreground hover:text-primary-strong',
+		),
 	});
 
 	return (
@@ -76,7 +83,7 @@ export function Header() {
 						alt="Gen-Z Technologies"
 						className="h-9 w-auto object-contain"
 					/>
-					<span className="font-display font-bold text-lg tracking-tight text-foreground hidden sm:inline">
+					<span className={cn('font-display font-bold text-lg tracking-tight hidden sm:inline', onDark ? 'text-white' : 'text-foreground')}>
 						Gen-Z Technologies
 					</span>
 				</Link>
@@ -233,7 +240,7 @@ export function Header() {
 				<div className="hidden lg:flex items-center gap-3 shrink-0">
 					<Link
 						href="/login"
-						className="text-xs font-bold text-foreground hover:text-primary-strong transition-colors px-3"
+						className={cn('text-xs font-bold transition-colors px-3', onDark ? 'text-white/85 hover:text-white' : 'text-foreground hover:text-primary-strong')}
 					>
 						Log in
 					</Link>
@@ -250,10 +257,10 @@ export function Header() {
 					size="icon"
 					variant="outline"
 					onClick={() => setOpen(!open)}
-					className="lg:hidden border-border text-foreground bg-white rounded-full hover:bg-background"
+					className={cn('lg:hidden rounded-full', onDark ? 'border-white/25 text-white bg-white/10 hover:bg-white/20' : 'border-border text-foreground bg-white hover:bg-background')}
 					aria-label="Toggle menu"
 				>
-					<MenuToggleIcon open={open} className="size-5 text-foreground" duration={300} />
+					<MenuToggleIcon open={open} className={cn('size-5', onDark ? 'text-white' : 'text-foreground')} duration={300} />
 				</Button>
 			</div>
 

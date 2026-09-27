@@ -135,7 +135,7 @@ export default function ProductJourney() {
   // no pinning, no scrubbing — fully accessible, no scroll-jacking.
   if (reduced || !desktop) {
     return (
-      <section className="relative w-full border-b border-white/10 bg-surface-dark py-20 px-6 md:px-12">
+      <section className="relative w-full border-b border-white/10 bg-[#050a24] py-20 px-6 md:px-12">
         <div className="max-w-7xl mx-auto flex flex-col gap-16">
           <JourneyHeader />
           {CHAPTERS.map((chapter) => {
@@ -160,7 +160,7 @@ export default function ProductJourney() {
     <section
       ref={wrapperRef}
       id="journey"
-      className="relative w-full border-b border-white/10 bg-surface-dark"
+      className="relative w-full border-b border-white/10 bg-[#050a24]"
       style={{ height: `${CHAPTERS.length * 100}vh` }}
     >
       <div ref={viewportRef} className="h-screen flex items-center overflow-hidden px-6 md:px-12">

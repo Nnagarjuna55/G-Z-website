@@ -8,3 +8,8 @@ node_modules/
 next-env.d.ts
 
 .vercel
+
+# Agent skills (installed via `npx skills add`, not app source)
+.agents/
+.claude/
+skills-lock.json

@@ -31,7 +31,7 @@ interface RingSpec {
 
 const RINGS: RingSpec[] = [
   {
-    radius: 1.7,
+    radius: 1.55,
     rotation: [1.15, 0, 0.35],
     speed: 0.22,
     nodes: [
@@ -40,7 +40,7 @@ const RINGS: RingSpec[] = [
     ],
   },
   {
-    radius: 2.1,
+    radius: 1.95,
     rotation: [1.4, 0, -0.55],
     speed: -0.16,
     nodes: [
@@ -67,7 +67,7 @@ function Ring({ spec, reduced }: { spec: RingSpec; reduced: boolean }) {
     <group rotation={spec.rotation}>
       <mesh>
         <torusGeometry args={[spec.radius, 0.006, 12, 220]} />
-        <meshBasicMaterial color={NAVY} transparent opacity={0.18} />
+        <meshBasicMaterial color="#8da2ff" transparent opacity={0.22} />
       </mesh>
 
       {spec.nodes.map((node, i) => (
@@ -87,11 +87,11 @@ function Ring({ spec, reduced }: { spec: RingSpec; reduced: boolean }) {
               clearcoat={1}
               clearcoatRoughness={0.15}
               emissive={node.color}
-              emissiveIntensity={0.25}
+              emissiveIntensity={0.8}
             />
           </mesh>
           <Html center position={[0, 0.36, 0]} zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
-            <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border border-border bg-white/90 backdrop-blur-sm px-3 py-1.5 text-xs font-bold text-foreground shadow-lg">
+            <div className="hidden sm:flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-3 py-1.5 text-[11px] font-bold text-white shadow-lg">
               <span className="h-2 w-2 rounded-full" style={{ backgroundColor: node.color }} />
               {node.label}
             </div>
@@ -132,18 +132,20 @@ function Suite({ reduced, scrollT }: { reduced: boolean; scrollT: number }) {
         <mesh>
           <icosahedronGeometry args={[1.1, 24]} />
           <MeshDistortMaterial
-            color="#0d0da8"
+            color="#2b3ecc"
             distort={0.3}
             speed={reduced ? 0 : 1.8}
-            roughness={0.04}
-            metalness={0.55}
-            envMapIntensity={1.4}
+            roughness={0.18}
+            metalness={0.25}
+            emissive="#0b1c8a"
+            emissiveIntensity={0.55}
+            envMapIntensity={2.2}
           />
         </mesh>
 
         <mesh ref={shellRef}>
           <icosahedronGeometry args={[1.55, 1]} />
-          <meshBasicMaterial color={ORANGE} wireframe transparent opacity={0.14} />
+          <meshBasicMaterial color={ORANGE} wireframe transparent opacity={0.28} />
         </mesh>
       </Float>
 
@@ -151,7 +153,7 @@ function Suite({ reduced, scrollT }: { reduced: boolean; scrollT: number }) {
         <Ring key={spec.radius} spec={spec} reduced={reduced} />
       ))}
 
-      <Sparkles count={45} scale={[7, 5, 4]} size={2.2} speed={reduced ? 0 : 0.35} color={ORANGE} opacity={0.55} />
+      <Sparkles count={90} scale={[11, 7, 6]} size={2.4} speed={reduced ? 0 : 0.3} color="#ffd9c7" opacity={0.7} />
     </group>
   );
 }
@@ -173,10 +175,10 @@ export default function SuiteOrbitScene({
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}
     >
-      <ambientLight intensity={0.55} />
-      <directionalLight position={[4, 6, 5]} intensity={1.4} />
-      <pointLight position={[-4, 2, 3]} color={ORANGE} intensity={30} distance={12} />
-      <pointLight position={[4, -2, 2.5]} color={GREEN} intensity={22} distance={12} />
+      <ambientLight intensity={0.85} />
+      <directionalLight position={[4, 6, 5]} intensity={2.4} />
+      <pointLight position={[-4, 2, 3]} color={ORANGE} intensity={55} distance={14} />
+      <pointLight position={[4, -2, 2.5]} color={GREEN} intensity={40} distance={14} />
 
       {/* Built-in light formers: glossy reflections with no external HDR download */}
       <Environment resolution={256}>
