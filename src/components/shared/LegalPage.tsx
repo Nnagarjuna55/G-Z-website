@@ -19,8 +19,8 @@ interface LegalPageProps {
 
 export default function LegalPage({ eyebrow, title, intro, effectiveDate, sections }: LegalPageProps) {
   return (
-    <main className="relative min-h-screen w-full">
-      <Navbar />
+    <main className="dark-zone relative min-h-screen w-full">
+      <Navbar overDark />
 
       <PageHeader eyebrow={eyebrow} title={title} description={intro}>
         <p className="text-xs font-mono font-bold text-muted">Effective {effectiveDate}</p>

@@ -22,8 +22,8 @@ const FEATURES = [
 
 export default function AIInterviewerPage() {
   return (
-    <main className="relative min-h-screen w-full">
-      <Navbar />
+    <main className="dark-zone relative min-h-screen w-full">
+      <Navbar overDark />
 
       <ProductHero
         eyebrow="AI Interviewer &bull; For Learners"

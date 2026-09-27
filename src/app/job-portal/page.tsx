@@ -21,8 +21,8 @@ const STATS = [
 
 export default function JobPortalPage() {
   return (
-    <main className="relative min-h-screen w-full">
-      <Navbar />
+    <main className="dark-zone relative min-h-screen w-full">
+      <Navbar overDark />
 
       <ProductHero
         eyebrow="AI Job Portal &bull; For Companies"

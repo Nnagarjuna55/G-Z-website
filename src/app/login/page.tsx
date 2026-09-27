@@ -33,8 +33,8 @@ const STEPS = [
 
 export default function LoginPage() {
   return (
-    <main className="relative min-h-screen w-full">
-      <Navbar />
+    <main className="dark-zone relative min-h-screen w-full">
+      <Navbar overDark />
 
       <section className="pt-36 pb-20 px-6 md:px-12">
         <div className="max-w-3xl mx-auto">

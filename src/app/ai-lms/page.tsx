@@ -24,8 +24,8 @@ const BENEFITS = [
 
 export default function AILmsPage() {
   return (
-    <main className="relative min-h-screen w-full">
-      <Navbar />
+    <main className="dark-zone relative min-h-screen w-full">
+      <Navbar overDark />
 
       <ProductHero
         eyebrow="AI LMS &bull; For Institutions"

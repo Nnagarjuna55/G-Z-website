@@ -40,8 +40,8 @@ const PROCESS = [
 
 export default function CareersPage() {
   return (
-    <main className="relative min-h-screen w-full">
-      <Navbar />
+    <main className="dark-zone relative min-h-screen w-full">
+      <Navbar overDark />
 
       <PageHeader
         eyebrow="Careers"

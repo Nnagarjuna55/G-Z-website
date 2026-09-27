@@ -39,8 +39,8 @@ const VALUES = [
 
 export default function AboutPage() {
   return (
-    <main className="relative min-h-screen w-full">
-      <Navbar />
+    <main className="dark-zone relative min-h-screen w-full">
+      <Navbar overDark />
 
       {/* Hero */}
       <section className="pt-36 pb-16 px-6 md:px-12 border-b border-border relative overflow-hidden">

@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 
 export default function UseCasesPage() {
   return (
-    <main className="relative min-h-screen w-full">
-      <Navbar />
+    <main className="dark-zone relative min-h-screen w-full">
+      <Navbar overDark />
 
       <PageHeader
         eyebrow="Use Cases"

@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 
 export default function SolutionsPage() {
   return (
-    <main className="relative min-h-screen w-full">
-      <Navbar />
+    <main className="dark-zone relative min-h-screen w-full">
+      <Navbar overDark />
 
       <section className="pt-36 pb-16 px-6 md:px-12 border-b border-border">
         <div className="max-w-7xl mx-auto">

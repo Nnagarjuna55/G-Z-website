@@ -117,8 +117,8 @@ function CellValue({ value }: { value: Cell }) {
 
 export default function PricingPage() {
   return (
-    <main className="relative min-h-screen w-full">
-      <Navbar />
+    <main className="dark-zone relative min-h-screen w-full">
+      <Navbar overDark />
 
       <PageHeader
         eyebrow="Pricing"

@@ -118,23 +118,48 @@
   --color-muted: rgba(255, 255, 255, 0.62);
   --color-muted-foreground: rgba(255, 255, 255, 0.62);
   --color-input: rgba(255, 255, 255, 0.14);
-  /* The brand orange darkens for contrast on cream; on navy it must lighten. */
+  /* Brand orange and green are both darkened for contrast on cream; on navy they
+     must lighten instead, or eyebrow labels and links go near-invisible. */
   --color-primary-strong: #ff7a3d;
   --color-primary-hover: #ff9463;
+  --color-accent: #35d6a0;
+  --color-accent-hover: #5fe3b8;
   background-color: #000419;
   color: #fff;
 }
 
 .dark-zone .bg-white,
 .dark-zone .bg-white\/60,
+.dark-zone .bg-white\/70,
 .dark-zone .bg-white\/80,
-.dark-zone .bg-white\/90 {
+.dark-zone .bg-white\/90,
+.dark-zone .bg-white\/95 {
   background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(6px);
 }
 
 .dark-zone .border-white {
   border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* `bg-foreground text-white` is the light theme's inverted-emphasis panel (highlighted
+   pricing plan, CTA bands). Flipping --color-foreground to white would render them
+   white-on-white, so emphasis becomes a raised navy surface here instead. */
+.dark-zone .bg-foreground {
+  background-color: #141d52;
+}
+
+.dark-zone .border-foreground {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.dark-zone .hover\:bg-foreground:hover,
+.dark-zone .group:hover .group-hover\:bg-foreground {
+  background-color: #1d2a75;
+}
+
+.dark-zone .group:hover .group-hover\:border-foreground {
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .dark-zone .shadow-sm,

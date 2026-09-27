@@ -23,8 +23,8 @@ const FEATURES = [
 
 export default function ResumeBuilderPage() {
   return (
-    <main className="relative min-h-screen w-full">
-      <Navbar />
+    <main className="dark-zone relative min-h-screen w-full">
+      <Navbar overDark />
 
       <ProductHero
         eyebrow="AI Resume Builder &bull; For Learners"
