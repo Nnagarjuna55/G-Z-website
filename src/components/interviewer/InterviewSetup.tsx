@@ -38,13 +38,13 @@ export default function InterviewSetup({ onStart }: InterviewSetupProps) {
 
       <div className="mb-8">
         <span className="text-xs font-mono font-bold text-foreground uppercase tracking-wider mb-3 block">Difficulty</span>
-        <div className="flex gap-2.5">
+        <div className="flex flex-wrap gap-2.5">
           {INTERVIEW_DIFFICULTIES.map((d) => (
             <button
               key={d}
               onClick={() => setDifficulty(d)}
               className={cn(
-                "flex-1 px-4 py-3 rounded-xl text-sm font-bold border transition-colors",
+                "flex-1 basis-24 px-3 sm:px-4 py-3 rounded-xl text-sm font-bold border transition-colors",
                 difficulty === d ? "bg-accent text-white border-accent" : "bg-background text-foreground border-border hover:border-accent/50"
               )}
             >
