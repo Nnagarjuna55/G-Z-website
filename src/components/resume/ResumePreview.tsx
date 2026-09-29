@@ -8,7 +8,7 @@ export default function ResumePreview({ data }: { data: ResumeData }) {
     !data.summary && skillList.length === 0 && data.experience.length === 0 && data.education.length === 0;
 
   return (
-    <div className="bg-white rounded-3xl border border-border shadow-lg p-8 sm:p-10 aspect-[8.5/11] overflow-y-auto">
+    <div className="paper-sheet rounded-3xl shadow-lg p-8 sm:p-10 aspect-[8.5/11] overflow-y-auto">
       {isEmpty && (
         <p className="text-xs text-muted font-medium mb-6 pb-4 border-b border-dashed border-border">
           Your live preview appears here as you fill in the form on the left.

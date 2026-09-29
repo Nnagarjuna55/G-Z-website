@@ -138,6 +138,28 @@
   backdrop-filter: blur(6px);
 }
 
+/* A document preview must look like the document it exports to (white paper),
+   so it opts out of the dark-zone token flip and restores the light palette. */
+.paper-sheet,
+.dark-zone .paper-sheet {
+  --color-background: #F5F3EF;
+  --color-surface: #FFFFFF;
+  --color-foreground: #000080;
+  --color-border: #D8D4CC;
+  --color-muted: #6B6B6B;
+  --color-muted-foreground: #6B6B6B;
+  --color-primary-strong: #C43C00;
+  --color-accent: #02683F;
+  background-color: #FFFFFF;
+  color: #000080;
+  border: 1px solid #D8D4CC;
+}
+
+.dark-zone .paper-sheet .bg-white {
+  background-color: #FFFFFF;
+  backdrop-filter: none;
+}
+
 .dark-zone .border-white {
   border-color: rgba(255, 255, 255, 0.14);
 }
