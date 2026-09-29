@@ -4,6 +4,13 @@ const nextConfig: NextConfig = {
   // Lets a production build use its own folder so it never collides with a running `next dev`.
   distDir: process.env.NEXT_DIST_DIR || ".next",
   reactStrictMode: true,
+  experimental: {
+    // Vercel's Node 24 image crashes in webpack's wasm asset-hashing step
+    // ("WasmHash: Cannot read properties of undefined (reading 'length')"),
+    // reported as "Next.js build worker exited with code: 1". Running the build
+    // in-process instead of a worker avoids that wasm instance entirely.
+    webpackBuildWorker: false,
+  },
   devIndicators: false,
   images: {
     remotePatterns: [
