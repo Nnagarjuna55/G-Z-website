@@ -5,11 +5,14 @@ const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
   reactStrictMode: true,
   experimental: {
-    // Vercel's Node 24 image crashes in webpack's wasm asset-hashing step
-    // ("WasmHash: Cannot read properties of undefined (reading 'length')"),
-    // reported as "Next.js build worker exited with code: 1". Running the build
-    // in-process instead of a worker avoids that wasm instance entirely.
     webpackBuildWorker: false,
+  },
+  webpack: (config) => {
+    // Webpack's default xxhash64 hasher is a wasm module that crashes on Vercel's
+    // Node 24 image ("WasmHash: Cannot read properties of undefined (reading
+    // 'length')"). sha256 uses Node's native crypto and avoids wasm entirely.
+    config.output = { ...config.output, hashFunction: "sha256" };
+    return config;
   },
   devIndicators: false,
   images: {
