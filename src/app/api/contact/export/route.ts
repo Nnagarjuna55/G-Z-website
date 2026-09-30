@@ -2,34 +2,52 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-export async function GET() {
-  try {
-    const csvFilePath = path.join(process.cwd(), "data", "contact-inquiries.csv");
+const CSV_HEADER = `"Timestamp","Name","Email","Phone","Location","Inquiry Message"\n`;
 
-    if (!fs.existsSync(csvFilePath)) {
-      // Create empty template with header if not exists yet
-      const dataDir = path.join(process.cwd(), "data");
-      if (!fs.existsSync(dataDir)) {
-        fs.mkdirSync(dataDir, { recursive: true });
-      }
-      const csvHeader = `"Timestamp","Name","Email","Phone","Location","Inquiry Message"\n`;
-      fs.writeFileSync(csvFilePath, csvHeader, "utf8");
-    }
-
-    const fileContent = fs.readFileSync(csvFilePath, "utf8");
-
-    return new NextResponse(fileContent, {
-      status: 200,
-      headers: {
-        "Content-Type": "text/csv; charset=utf-8",
-        "Content-Disposition": `attachment; filename="contact-inquiries-${new Date().toISOString().slice(0, 10)}.csv"`,
-      },
-    });
-  } catch (error) {
-    console.error("Error exporting Excel CSV:", error);
+/**
+ * Exports captured inquiries as CSV.
+ *
+ * This returns personal data (names, emails, phone numbers), so it requires a
+ * secret. Set CONTACT_EXPORT_TOKEN and call with `?token=...` or an
+ * `Authorization: Bearer ...` header. With no token configured the route stays
+ * closed rather than defaulting to public.
+ */
+export async function GET(req: Request) {
+  const expected = process.env.CONTACT_EXPORT_TOKEN;
+  if (!expected) {
     return NextResponse.json(
-      { error: "Error exporting contact inquiries Excel file" },
-      { status: 500 }
+      { error: "Export is disabled. Set CONTACT_EXPORT_TOKEN to enable it." },
+      { status: 404 }
     );
   }
+
+  const url = new URL(req.url);
+  const supplied =
+    url.searchParams.get("token") ||
+    (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
+
+  if (supplied !== expected) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // Serverless filesystems are read-only and hold no persisted inquiries, so a
+  // missing file is an empty export, never a 500.
+  let fileContent = CSV_HEADER;
+  try {
+    const csvFilePath = path.join(process.cwd(), "data", "contact-inquiries.csv");
+    if (fs.existsSync(csvFilePath)) fileContent = fs.readFileSync(csvFilePath, "utf8");
+  } catch (error) {
+    console.error("Could not read inquiries file:", error);
+  }
+
+  return new NextResponse(fileContent, {
+    status: 200,
+    headers: {
+      "Content-Type": "text/csv; charset=utf-8",
+      "Cache-Control": "no-store",
+      "Content-Disposition": `attachment; filename="contact-inquiries-${new Date()
+        .toISOString()
+        .slice(0, 10)}.csv"`,
+    },
+  });
 }
