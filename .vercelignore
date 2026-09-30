@@ -1,7 +1,7 @@
 # `vercel deploy` uploads the working directory, not just git-tracked files.
 # Without this, gitignored local data (captured contact inquiries) and secrets
 # get bundled into the deployment and can be served publicly.
-data/
+/data/
 .env
 .env.local
 .next/
