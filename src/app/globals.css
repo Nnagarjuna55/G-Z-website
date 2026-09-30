@@ -106,6 +106,14 @@
   .bg-aurora { animation: none; }
 }
 
+/* TiltCard reveals sit at rotateX(22deg) with perspective until scrolled into view,
+   which bleeds a few px horizontally and gives the page a sideways scrollbar on
+   tablet widths. `clip` (unlike `hidden`) does not create a scroll container, so
+   position:sticky and the GSAP ScrollTrigger pin keep working. */
+main {
+  overflow-x: clip;
+}
+
 /* Dark cinematic zone. Tailwind v4 utilities resolve --color-* at use time, so
    redefining the tokens here flips every descendant that uses them (bg-background,
    text-foreground, border-border, text-muted…) without touching each component.

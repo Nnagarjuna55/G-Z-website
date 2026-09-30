@@ -13,3 +13,6 @@ next-env.d.ts
 .agents/
 .claude/
 skills-lock.json
+
+# Scratch production build dir (NEXT_DIST_DIR)
+.next-prod/

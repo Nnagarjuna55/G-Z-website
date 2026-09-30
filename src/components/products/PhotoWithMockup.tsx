@@ -33,7 +33,7 @@ export default function PhotoWithMockup({ photo, alt, visual, mirror = false, pr
       <div
         className={cn(
           "relative -mt-28 sm:-mt-44 w-[92%] sm:w-[80%]",
-          mirror ? "mr-auto sm:-ml-6" : "ml-auto sm:-mr-6"
+          mirror ? "mr-auto lg:-ml-6" : "ml-auto lg:-mr-6"
         )}
       >
         <TiltCard reveal={false} max={7}>
